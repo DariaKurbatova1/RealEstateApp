@@ -1,0 +1,20 @@
+nav {
+    display: flex;
+    align-items: baseline;
+    font-weight: bolder;
+}
+.navbar{
+    display: flex;
+    align-items: baseline;
+}
+.navbar-menu{
+    display: flex;
+    list-style-type: none;
+}
+.navbar-menu > li{
+    padding-left: 5px;
+    padding-right: 40px;
+}
+.navbar-menu > li> a{
+    text-decoration: none;
+}
