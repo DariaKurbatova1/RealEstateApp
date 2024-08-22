@@ -4,8 +4,8 @@
     <a>Logo</a>
   
     <div class='navbar'>
-      <ul class='navbar-menu'>
-        <li class='nav-item active'>
+      <ul class='menu'>
+        <li>
           <a class='nav-link' href='#'>Home</a>
         </li>
         <li class='nav-item'>
@@ -19,6 +19,17 @@
         <input type='search' placeholder='Search' >
         <button type='submit'>Search</button>
       </form>
+        <a class='nav-link' href='#'>Login</a>
     </div>
   </nav>
+
+  <hr>
+
+  <div class='search-options'>
+    <select name="sale-rent" id="sale-rent">     
+        <option value="rent">Buy</option>
+        <option value="rent">Rent</option>
+    </select>
+    <button type='submit'>Filter</button>
+  </div>
 {% endblock %} 

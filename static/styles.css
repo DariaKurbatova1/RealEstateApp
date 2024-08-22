@@ -7,14 +7,20 @@ nav {
     display: flex;
     align-items: baseline;
 }
-.navbar-menu{
+.menu{
     display: flex;
     list-style-type: none;
 }
-.navbar-menu > li{
-    padding-left: 5px;
-    padding-right: 40px;
-}
-.navbar-menu > li> a{
+
+.navbar a{
     text-decoration: none;
+    padding-left: 20px;
+    padding-right: 20px;
+}
+.search-options > *{
+    margin-left: 60px;
+    margin-right: 20px;
+}
+br {
+    color: black;
 }
