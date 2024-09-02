@@ -26,10 +26,34 @@
   <hr>
 
   <div class='search-options'>
+    <label for='sale-rent'> Buy/Rent:</label>
     <select name="sale-rent" id="sale-rent">     
         <option value="rent">Buy</option>
         <option value="rent">Rent</option>
     </select>
     <button type='submit'>Filter</button>
   </div>
+
+  <hr>
+
+  <h1>Listings</h1>
+  <table>
+  {% for property in properties %}
+    <tr>
+        <td>
+            <ul>
+                <li>{{property.type}}</li>
+                <li>${{property.price}}</li>
+                <li>{{property.address}}</li>
+                <li>Number of bedrooms: {{property.bedroomNum}}</li>
+                <li>Number of bathrooms: {{property.bathroomNum}}</li>
+                <li>Size: {{property.squareFeet}}</li>
+                {% if property.lotSize != 0 %}
+                <li>{{property.lotSize}}</li>
+                {% endif %}
+            </ul>
+        </td>
+    </tr>
+  {% endfor %}
+  </table>
 {% endblock %} 
