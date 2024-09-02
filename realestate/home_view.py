@@ -1,6 +1,15 @@
 from flask import (Blueprint, render_template)
 from . import app
 from . property import Property
+from flask import Flask
+from pymongo import MongoClient
+
+app = Flask(__name__)
+
+client = MongoClient('localhost', 27017)
+
+db = client.flask_db
+todos = db.todos
 
 #bp = Blueprint('home_view', __name__, url_prefix='/')
 
@@ -13,3 +22,7 @@ properties = [property1, property2, property3]
 @app.route("/")
 def index():
   return render_template('index.html', properties=properties)
+
+# @app.route("/db/")
+# def db():
+#   return render_template('db.html')
