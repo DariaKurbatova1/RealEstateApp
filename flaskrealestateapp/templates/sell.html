@@ -1,7 +1,21 @@
 {% extends 'base.html' %}
 {% block content %}
-<h1>Sell Your Property</h1>
+<h1>Sell or Rent Your Property</h1>
 <form method='POST'>
+    <p>
+        <b><label for="offerType">For Sale/Rent</label></b>
+    </p>
+    <p>
+        <input name='offerType' type='radio' value='sale'>
+        <label for='sale'>For Sale</label>
+    </p>
+    <p>
+        <input name='type' type='radio' value='rent'>
+        <label for='rent'>For Rent</label>
+    </p>
+
+
+
     <p>
         <b><label for="type">Property type</label></b>
     </p>

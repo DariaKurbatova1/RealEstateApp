@@ -16,6 +16,7 @@ bp = Blueprint('sell_view', __name__, url_prefix='/sell/')
 @bp.route("/", methods=['GET', 'POST'])
 def sell_property():
     if request.method == 'POST':
+        offerType = request.form['offerType']
         type = request.form['type']
         price = request.form['price']
         address = request.form['address']
@@ -24,6 +25,7 @@ def sell_property():
         squareFeet = request.form['squareFeet']
         lotSize = request.form['lotSize']
         properties.insert_one({
+            'offerType': offerType,
             'type': type,
             'price': price,
             'address': address,
