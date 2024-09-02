@@ -1,5 +1,5 @@
 import os
-
+from flask import Flask, flash, render_template, current_app
 from flask import Flask
 
 
@@ -23,6 +23,11 @@ def create_app(test_config=None):
         os.makedirs(app.instance_path)
     except OSError:
         pass
+    
+    #home page
+    from .home_views import bp as home_bp
+    app.register_blueprint(home_bp)
+    
 
     # a simple page that says hello
     @app.route('/hello')
