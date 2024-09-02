@@ -42,15 +42,14 @@
     <tr>
         <td>
             <ul>
-                <li>{{property.type}}</li>
-                <li>${{property.price}}</li>
-                <li>{{property.address}}</li>
-                <li>Number of bedrooms: {{property.bedroomNum}}</li>
-                <li>Number of bathrooms: {{property.bathroomNum}}</li>
-                <li>Size: {{property.squareFeet}}</li>
-                {% if property.lotSize != 0 %}
-                <li>{{property.lotSize}}</li>
-                {% endif %}
+                
+                <li> {{property['type']}} </li>
+                <li> {{property['price']}} </li>
+                <li> {{property['address']}} </li>
+                <li> {{property['bedroomNum']}} </li>
+                <li> {{property['bathroomNum']}} </li>
+                <li> {{property['squareFeet']}} </li>
+                <li> {{property['lotSize']}} </li>
             </ul>
         </td>
     </tr>
