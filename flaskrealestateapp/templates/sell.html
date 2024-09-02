@@ -1,5 +1,74 @@
 {% extends 'base.html' %}
 {% block content %}
 <h1>Sell Your Property</h1>
+<form method='POST'>
+    <p>
+        <b><label for="type">Property type</label></b>
+    </p>
+    <p>
+        <input name='degree' type='radio' value='condo'>
+        <label for='condo'>Condo</label>
+    </p>
+    <p>
+        <input name='degree' type='radio' value='house'>
+        <label for='house'>House</label>
+    </p>
+    <p>
+        <input name='degree' type='radio' value='lot'>
+        <label for='lot'>Lot</label>
+    </p>
+
+
+    
+    <p>
+        <b><label for="price">Price</label></b>
+    </p>
+    <p>
+        <input name='price' type='number'>
+    </p>
+
+
+
+    <p>
+        <b><label for="address">Address</label></b>
+    </p>
+    <p>
+        <input name='address' type='text'>
+    </p>
+
+
+
+
+    <p>
+        <b><label for="bedroomNum">Number of Bedrooms</label></b>
+    </p>
+    <p>
+        <input name='bedroomNum' type='number'>
+    </p>
+
+
+    <p>
+        <b><label for="bathroomNum">Number of Bathrooms</label></b>
+    </p>
+    <p>
+        <input name='bathroomNum' type='number'>
+    </p>
+
+
+    <p>
+        <b><label for="squareFeet">Square Feet</label></b>
+    </p>
+    <p>
+        <input name='squareFeet' type='number'>
+    </p>
+
+
+
+    <p>
+        <b><label for="lotSize">Lot Size</label></b>
+    </p>
+    <p>
+        <input name='lotSize' type='number'>
+    </p>
 
 {% endblock %} 

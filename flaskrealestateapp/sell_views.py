@@ -14,7 +14,7 @@ properties = db.properties
 bp = Blueprint('sell_view', __name__, url_prefix='/sell/')
 
 @bp.route("/", methods=['GET', 'POST'])
-def index():
+def sell_property():
     if request.method == 'POST':
         pass
 
