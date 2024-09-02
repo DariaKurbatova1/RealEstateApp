@@ -28,6 +28,9 @@ def create_app(test_config=None):
     from .home_views import bp as home_bp
     app.register_blueprint(home_bp)
     
+    #sell page
+    from .sell_views import bp as sell_bp
+    app.register_blueprint(sell_bp)
 
     # a simple page that says hello
     @app.route('/hello')
