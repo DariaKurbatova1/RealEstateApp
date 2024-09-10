@@ -24,6 +24,9 @@ bp = Blueprint('sell_view', __name__, url_prefix='/sell/')
 @bp.route("/", methods=['GET', 'POST'])
 def sell_property():
     if request.method == 'POST':
+        #get the id of newly inserted record
+        new_id = (db.properties.count_documents({}))+1
+        #get form value and insert new record
         offerType = request.form['offerType']
         type = request.form['type']
         price = request.form['price']
@@ -33,6 +36,7 @@ def sell_property():
         squareFeet = request.form['squareFeet']
         lotSize = request.form['lotSize']
         properties.insert_one({
+            'id': new_id,
             'offerType': offerType,
             'type': type,
             'price': price,
@@ -42,6 +46,7 @@ def sell_property():
             'squareFeet': squareFeet,
             'lotSize': lotSize
         })
+        #get the id of newly inserted record
         #upload file
         if 'file' not in request.files:
             #flash('No file part')
@@ -57,7 +62,7 @@ def sell_property():
         if file and allowed_file(file.filename):
             filename = secure_filename(file.filename)
             basedir = os.path.abspath(os.path.dirname(__file__))
-            file.save(os.path.join(basedir, app.config['UPLOAD_FOLDER'], filename))
+            file.save(os.path.join(basedir, app.config['UPLOAD_FOLDER'], str(new_id)))
             return redirect(url_for('home_view.index'))
         return redirect(url_for('home_view.index'))
 
