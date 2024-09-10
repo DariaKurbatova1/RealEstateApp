@@ -62,7 +62,14 @@ def sell_property():
         if file and allowed_file(file.filename):
             filename = secure_filename(file.filename)
             basedir = os.path.abspath(os.path.dirname(__file__))
-            file.save(os.path.join(basedir, app.config['UPLOAD_FOLDER'], str(new_id)))
+            new_id = str(new_id)
+            file_extention = '.'+filename.rsplit('.', 1)[1].lower()
+            new_filename = new_id + file_extention
+            file.save(os.path.join(basedir, app.config['UPLOAD_FOLDER'], new_filename))
+            # old_name = './static/uploads/'+file.filename
+            # new_name = './static/uploads/'+new_id
+            # os.rename(old_name, new_name)
+            
             return redirect(url_for('home_view.index'))
         return redirect(url_for('home_view.index'))
 
