@@ -65,7 +65,7 @@ def sell_property():
             new_id = str(new_id)
             file_extention = '.'+filename.rsplit('.', 1)[1].lower()
             new_filename = new_id + file_extention
-            file.save(os.path.join(basedir, app.config['UPLOAD_FOLDER'], new_filename))
+            file.save(os.path.join(basedir, app.config['UPLOAD_FOLDER'], (new_id+'.jpg')))
             # old_name = './static/uploads/'+file.filename
             # new_name = './static/uploads/'+new_id
             # os.rename(old_name, new_name)
