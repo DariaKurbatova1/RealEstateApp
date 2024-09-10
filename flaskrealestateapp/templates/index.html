@@ -14,14 +14,17 @@
   <hr>
 
   <h1>Listings</h1>
-  <table>
+  <table id="properties">
   {% for property in properties %}
     <tr>
         <td>
-            <ul>
+            <ul class="properties-ul">
+                <li>
+                  <img id="property-image" src="../static/uploads/{{property.id}}.jpg" alt='house'>
+                </li>
                 <li> {{property['offerType']}}</li>
                 <li> {{property['type']}} </li>
-                <li> {{property['price']}} </li>
+                <li> ${{property['price']}} </li>
                 <li> {{property['address']}} </li>
                 <li> {{property['bedroomNum']}} </li>
                 <li> {{property['bathroomNum']}} </li>

@@ -24,3 +24,14 @@ nav {
 br {
     color: black;
 }
+#properties{
+    display: flex;
+    justify-content: center;
+}
+.properties-ul{
+    list-style-type: none;
+}
+#property-image{
+    width:100%;
+    max-width:600px;
+}
