@@ -31,6 +31,10 @@ def create_app(test_config=None):
     #sell page
     from .sell_views import bp as sell_bp
     app.register_blueprint(sell_bp)
+    
+    #upload image page
+    from .upload_img_views import bp as upload_bp
+    app.register_blueprint(upload_bp)
 
     # a simple page that says hello
     @app.route('/hello')
