@@ -34,7 +34,11 @@
                     <li> {{property['bathroomNum']}}</li>
                     <img src="../static/bathroom-icon.png" alt="bedroom icon">
                   </div>
-                  <li> ${{property['price']}} </li>
+                  {% if property['offerType'] == 'rent'%}
+                    <li> ${{property['price']}} / month </li>
+                  {% else %}
+                    <li> ${{property['price']}} </li>
+                  {% endif %}
                 </div>
                 <div class='property-info'>
                   <li> Floor Area: {{property['squareFeet']}} square ft.</li>
