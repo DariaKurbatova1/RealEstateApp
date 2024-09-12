@@ -11,6 +11,11 @@ db = client.flask_properties
 #create collection
 properties = db.properties
 
+UPLOAD_FOLDER = './static/uploads'
+ALLOWED_EXTENSIONS = {'txt', 'pdf', 'png', 'jpg', 'jpeg', 'gif'}
+
+app = Flask(__name__)
+app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
 
 bp = Blueprint('edit_property', __name__, url_prefix='/edit_property/')
 
@@ -44,25 +49,22 @@ def edit_property(property_id):
             'squareFeet': squareFeet,
             'lotSize': lotSize
         })
-        #upload file
-        # if 'file' not in request.files:
-        #     #flash('No file part')
-        #     print('No file part')
-        #     return redirect(request.url)
-        # file = request.files['file']
-        # # If the user does not select a file, the browser submits an
-        # # empty file without a filename.
-        # if file.filename == '':
-        #     #flash('No selected file')
-        #     print('No selected file')
-        #     return redirect(request.url)
-        # if file and allowed_file(file.filename):
-        #     filename = secure_filename(file.filename)
-        #     basedir = os.path.abspath(os.path.dirname(__file__))
-        #     new_id = str(new_id)
-        #     file_extention = '.'+filename.rsplit('.', 1)[1].lower()
-        #     new_filename = new_id + file_extention
-        #     file.save(os.path.join(basedir, app.config['UPLOAD_FOLDER'], (new_id+'.jpg')))
+        #upload new picture
+        if 'file' not in request.files:
+            #flash('No file part')
+            print('No file part')
+            return redirect(request.url)
+        file = request.files['file']
+        # If the user does not select a file, the browser submits an
+        # empty file without a filename.
+        if file.filename == '':
+            #flash('No selected file')
+            print('No selected file')
+            return redirect(request.url)
+        if file and allowed_file(file.filename):
+            filename = secure_filename(file.filename)
+            basedir = os.path.abspath(os.path.dirname(__file__))
+            file.save(os.path.join(basedir, app.config['UPLOAD_FOLDER'], (property_id+'.jpg')))
         
         #delete the old instance of the record
     

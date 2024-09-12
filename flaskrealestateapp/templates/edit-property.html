@@ -4,11 +4,23 @@
 <form method=post enctype=multipart/form-data>
     <p><b><label for="offerType">For Sale/Rent</label></b></p>
     <p>
-        <input name='offerType' type='radio' value='sale'>
+        <input 
+        name='offerType' 
+        type='radio' 
+        value='sale'
+        {% if property['offerType'] == 'sale'%}
+        checked='checked'>
+        {% endif %}
         <label for='sale'>For Sale</label>
     </p>
     <p>
-        <input name='offerType' type='radio' value='rent'>
+        <input 
+        name='offerType' 
+        type='radio' 
+        value='rent'
+        {% if property['offerType'] == 'rent'%}
+        checked='checked'>
+        {% endif %}
         <label for='rent'>For Rent</label>
     </p>
 
