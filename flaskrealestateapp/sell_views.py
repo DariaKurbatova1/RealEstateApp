@@ -28,7 +28,6 @@ def sell_property():
         new_id = (db.properties.count_documents({}))+1
         #get form value and insert new record
         offerType = request.form['offerType']
-        type = request.form['type']
         price = request.form['price']
         address = request.form['address']
         bedroomNum = request.form['bedroomNum']
@@ -38,7 +37,6 @@ def sell_property():
         properties.insert_one({
             'id': new_id,
             'offerType': offerType,
-            'type': type,
             'price': price,
             'address': address,
             'bedroomNum': bedroomNum,
