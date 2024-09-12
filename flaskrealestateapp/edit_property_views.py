@@ -23,6 +23,6 @@ def edit_property(property_id):
     #all_propertie  s = db.properties.find()
     
     #get property from db using id
-    property = db.find({id:property_id})
+    property = properties.find_one({'id':1})
 
     return render_template('edit-property.html', property=property)
