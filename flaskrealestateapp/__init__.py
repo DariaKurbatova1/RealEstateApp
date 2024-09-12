@@ -36,9 +36,6 @@ def create_app(test_config=None):
     from .upload_img_views import bp as upload_bp
     app.register_blueprint(upload_bp)
     
-    from .home_admin_views import bp as home_admin_bp
-    app.register_blueprint(home_admin_bp)
-    
     from .edit_property_views import bp as edit_property_bp
     app.register_blueprint(edit_property_bp)
 

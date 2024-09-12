@@ -10,16 +10,19 @@ client = MongoClient('localhost', 27017)
 db = client.flask_properties
 #create collection
 properties = db.properties
-#
+
 
 bp = Blueprint('edit_property', __name__, url_prefix='/edit_property/')
 
-@bp.route("/", methods=['GET', 'POST'])
+@bp.route("/<int:property_id>", methods=['GET', 'POST'])
 def edit_property(property_id):
     if request.method == 'POST':
         pass
     
     #select all properties
     #all_propertie  s = db.properties.find()
+    
+    #get property from db using id
+    property = db.find({id:property_id})
 
-    return render_template('edit-property.html', property_id=property_id)
+    return render_template('edit-property.html', property=property)
