@@ -15,13 +15,11 @@ properties = db.properties
 bp = Blueprint('edit_property', __name__, url_prefix='/edit_property/')
 
 @bp.route("/", methods=['GET', 'POST'])
-def edit_property():
+def edit_property(property_id):
     if request.method == 'POST':
-        #insert property
-        #properties.insert_one({'content': 'hello'})
         pass
     
     #select all properties
-    #all_properties = db.properties.find()
+    #all_propertie  s = db.properties.find()
 
-    return render_template('edit-property.html')
+    return render_template('edit-property.html', property_id=property_id)
