@@ -10,38 +10,40 @@
     </select>
     <button id='filter-button' type='submit'>Filter</button>
     <div id='filter' >
-      <div id='filter-price' class='from-to-filter'>
-        <p>Price: </p>
-        <label for="price_min">From:</label>
-        <input name='price_min' type='number'>
-        <label for="price_max">$     To:</label>
-        <input name='price_max' type='number'>
-      </div>
-      <div id='filter-bedroomNum' class='from-to-filter'>
-        <label for="bedroomNum">Number of Bedrooms: </label>
-        <input type="range" id="bedroomNum" name="bedroomNum" min="0" max="10" oninput="this.nextElementSibling.value = this.value"/>
-        <output></output>
-      </div>
-      <div id='filter-bathNum' class='from-to-filter'>
-        <label for="bathNum">Number of Bathrooms: </label>
-        <input type="range" id="bathNum" name="bathNum" min="0" max="10" oninput="this.nextElementSibling.value = this.value"/>
-        <output></output>
-      </div>
-      <div id='filter-squareFeet' class='from-to-filter'>
-        <p>Floor Area: </p>
-        <label for="squareFeet_min">From:</label>
-        <input name='squareFeet_min' type='number'>
-        <label for="squareFeet_max">ft.     To:</label>
-        <input name='squareFeet_max' type='number'>
-      </div>
-      <div id='filter-lotSize' class='from-to-filter'>
-        <p>Lot Size: </p>
-        <label for="lotSize_min">From:</label>
-        <input name='lotSize_min' type='number'>
-        <label for="lotSize_max">ft.     To:</label>
-        <input name='lotSize_max' type='number'>
-      </div>
-      <button id='filter-button-submit' type='submit' value=SubmitFilter>Submit</button>
+      <form method=post>
+        <div id='filter-price' class='from-to-filter'>
+          <p>Price: </p>
+          <label for="price_min">From:</label>
+          <input name='price_min' type='number'>
+          <label for="price_max">$     To:</label>
+          <input name='price_max' type='number'>
+        </div>
+        <div id='filter-bedroomNum' class='from-to-filter'>
+          <label for="bedroomNum">Number of Bedrooms: </label>
+          <input type="range" id="bedroomNum" name="bedroomNum" min="0" max="10" oninput="this.nextElementSibling.value = this.value"/>
+          <output></output>
+        </div>
+        <div id='filter-bathNum' class='from-to-filter'>
+          <label for="bathNum">Number of Bathrooms: </label>
+          <input type="range" id="bathNum" name="bathNum" min="0" max="10" oninput="this.nextElementSibling.value = this.value"/>
+          <output></output>
+        </div>
+        <div id='filter-squareFeet' class='from-to-filter'>
+          <p>Floor Area: </p>
+          <label for="squareFeet_min">From:</label>
+          <input name='squareFeet_min' type='number'>
+          <label for="squareFeet_max">ft.     To:</label>
+          <input name='squareFeet_max' type='number'>
+        </div>
+        <div id='filter-lotSize' class='from-to-filter'>
+          <p>Lot Size: </p>
+          <label for="lotSize_min">From:</label>
+          <input name='lotSize_min' type='number'>
+          <label for="lotSize_max">ft.     To:</label>
+          <input name='lotSize_max' type='number'>
+        </div>
+        <button id='filter-button-submit' type='submit' value=SubmitFilter>Submit</button>
+      </form>
     </div>
   </div>
 

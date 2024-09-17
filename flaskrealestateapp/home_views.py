@@ -16,25 +16,41 @@ bp = Blueprint('home_view', __name__, url_prefix='/')
 
 @bp.route("/", methods=['GET', 'POST'])
 def index():
+    all_properties = '' 
     if request.method == 'POST':
         #get form value 
-        price_min = request.form['price_min']
-        price_max = request.form['price_max']
-        bedroomNum = request.form['bedroomNum']
-        bathNum = request.form['bathNum']
-        squareFeet_min = request.form['squareFeet_min']
-        squareFeet_max = request.form['squareFeet_max']
-        lotSize_min = request.form['lotSize_min']
-        lotSize_min = request.form['lotSize_min']
+        price_min = (request.form['price_min'])
+        price_max = (request.form['price_max'])
+        bedroomNum = (request.form['bedroomNum'])
+        bathNum = (request.form['bathNum'])
+        squareFeet_min = (request.form['squareFeet_min'])
+        squareFeet_max = (request.form['squareFeet_max'])
+        lotSize_min = (request.form['lotSize_min'])
+        lotSize_max = (request.form['lotSize_min'])
         #validation
-        if (price_min > price_max):
+        if (price_min == '#'):
             pass
         if (squareFeet_min > squareFeet_max):
             pass
         if (lotSize_min > lotSize_max):
             pass
-        query = {"price": {"$gt": "5000000"}}
-        all_properties = properties.find(query)
+        
+        #if user does not fill filter form
+        all_properties = db.properties.find()
+        #if user inputs a min price
+        if (price_min):
+            price_min = int(price_min)
+            query = {'price': {'$gt': price_min}}
+            all_properties = properties.find(query)
+        #if user inputs a max price
+        if (price_max):
+            query = {'price': {'$lt': price_max}}
+            all_properties = properties.find(query)
+        #if user inputs a min price and max price
+        # if (price_min and price_max):
+        #     query = {'$and': ['price': {'$gt': price_min},'price': {'$lt': price_max}]}
+        #     all_properties = properties.find(query)
+        
         
         return render_template('index.html', properties=all_properties)
     #select all properties
