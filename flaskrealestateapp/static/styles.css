@@ -60,3 +60,10 @@ br {
     align-items: baseline;
 }
 
+#filter, p{
+    padding-right: 10px;
+}
+#filter, input{
+    margin: 10px;
+}
+
