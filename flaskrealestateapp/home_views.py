@@ -38,18 +38,27 @@ def index():
         #if user does not fill filter form
         all_properties = db.properties.find()
         #if user inputs a min price
-        if (price_min):
+        if (price_min and price_max is None):
             price_min = int(price_min)
             query = {'price': {'$gt': price_min}}
+            print(query)
             all_properties = properties.find(query)
+            print(all_properties[0])
         #if user inputs a max price
-        if (price_max):
+        if (price_max and price_min is None):
+            price_max = int(price_max)
             query = {'price': {'$lt': price_max}}
+            print(query)
             all_properties = properties.find(query)
+            print(all_properties[0])
         #if user inputs a min price and max price
-        # if (price_min and price_max):
-        #     query = {'$and': ['price': {'$gt': price_min},'price': {'$lt': price_max}]}
-        #     all_properties = properties.find(query)
+        if (price_min and price_max):
+            price_min = int(price_min)
+            price_max = int(price_max)
+            query = {'$and': [{'price': {'$gt': price_min},'price': {'$lt': price_max}}]}
+            print(query)
+            all_properties = properties.find(query)
+            print(all_properties[0])
         
         
         return render_template('index.html', properties=all_properties)
