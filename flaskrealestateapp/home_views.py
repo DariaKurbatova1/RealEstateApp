@@ -22,17 +22,9 @@ def index():
         price_min = (request.form['price_min'])
         price_max = (request.form['price_max'])
         bedroomNum = (request.form['bedroomNum'])
-        bathNum = (request.form['bathNum'])
-        squareFeet_min = (request.form['squareFeet_min'])
-        squareFeet_max = (request.form['squareFeet_max'])
-        lotSize_min = (request.form['lotSize_min'])
-        lotSize_max = (request.form['lotSize_min'])
+        bathroomNum = (request.form['bathNum'])
         #validation
         if (price_min == '#'):
-            pass
-        if (squareFeet_min > squareFeet_max):
-            pass
-        if (lotSize_min > lotSize_max):
             pass
         
         #if user does not fill filter form
@@ -59,6 +51,25 @@ def index():
             print(query)
             all_properties = properties.find(query)
             print(all_properties[0])
+        
+        #if user inputs min num of bedrooms
+        if (bedroomNum):
+            bedroomNum = int(bedroomNum)
+            print(bedroomNum)
+            query = {'bedroomNum': {'$gte': bedroomNum}}
+            print(query)
+            all_properties = properties.find(query)
+            print(all_properties[0])
+
+        #if user inputs min num of bathrooms
+        if (bathroomNum):
+            bathroomNum = int(bathroomNum)
+            query = {'bathroomNum': {'$gte': bathroomNum}}
+            print(query)
+            all_properties = properties.find(query)
+            print(all_properties[0])
+        
+        
         
         
         return render_template('index.html', properties=all_properties)

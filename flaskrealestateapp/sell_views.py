@@ -30,8 +30,8 @@ def sell_property():
         offerType = request.form['offerType']
         price = int(request.form['price'])
         address = request.form['address']
-        bedroomNum = request.form['bedroomNum']
-        bathroomNum = request.form['bathroomNum']
+        bedroomNum = int(request.form['bedroomNum'])
+        bathroomNum = int(request.form['bathroomNum'])
         squareFeet = request.form['squareFeet']
         lotSize = request.form['lotSize']
         properties.insert_one({
