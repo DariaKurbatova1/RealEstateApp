@@ -1,11 +1,11 @@
 nav {
     display: flex;
-    align-items: baseline;
+    align-items: center;
     font-weight: bolder;
 }
 .navbar{
     display: flex;
-    align-items: baseline;
+    align-items: center;
 }
 .menu{
     display: flex;
@@ -51,7 +51,7 @@ br {
     justify-content: space-between;
 }
 #filter{
-    border: 1px solid black;
+    border: 1px solid white;
     margin:20px;
     padding: 20px;
 }
@@ -59,6 +59,21 @@ br {
     display: flex;
     align-items: baseline;
 }
+.from-to-filter > * {
+    margin: 10px;
+}
+body{
+    background-color: rgb(10, 8, 64);
+    color: white;
+    margin: 5vw;
+}
+a{
+    color: gold;
+}
+#logo{
+    max-width: 10vw;
+}
+
 
 
 
