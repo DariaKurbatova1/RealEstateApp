@@ -7,3 +7,4 @@ After cloning the repository run the command
 ```
 flask --app flaskrealestateapp run
 ```
+![app image](./Screenshot 2024-10-08 at 2.47.03 PM)
