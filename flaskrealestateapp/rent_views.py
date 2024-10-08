@@ -16,4 +16,6 @@ bp = Blueprint('rent_view', __name__, url_prefix='/rent/')
 
 @bp.route("/", methods=['GET', 'POST'])
 def rent_property():
-    return render_template('rent.html')
+    query = {'offerType': 'rent'}
+    all_properties = properties.find(query)
+    return render_template('rent.html', properties=all_properties)
