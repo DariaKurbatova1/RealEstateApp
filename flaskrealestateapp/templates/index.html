@@ -34,48 +34,50 @@
   <hr>
 
   <h1>Listings</h1>
-  
-  {% for property in properties %}
-  <table id="properties">
-    <tr>
-        <td>
-            <ul class="properties-ul">
-                <li>
-                  <img id="property-image" src="../static/uploads/{{property.id}}.jpg" alt='house'>
-                </li>
-                <div class='property-info'>
-                  <li> {{property['type']}} for <b>{{property['offerType']}}</b></li>
-                  <li><b>{{property['address']}}</b></li>
-                </div>
-                <div class='property-info'>
-                  <div class='bed-bath-num'>
-                    <li> {{property['bedroomNum']}}</li>
-                    <img src="../static/bedroom-icon.png" alt="bedroom icon">
-                    <li> {{property['bathroomNum']}}</li>
-                    <img src="../static/bathroom-icon.png" alt="bedroom icon">
+  {% if properties %}
+    {% for property in properties %}
+    <table id="properties">
+      <tr>
+          <td>
+              <ul class="properties-ul">
+                  <li>
+                    <img id="property-image" src="../static/uploads/{{property.id}}.jpg" alt='house'>
+                  </li>
+                  <div class='property-info'>
+                    <li> {{property['type']}} for <b>{{property['offerType']}}</b></li>
+                    <li><b>{{property['address']}}</b></li>
                   </div>
-                  {% if property['offerType'] == 'rent'%}
-                    <li> ${{property['price']}} / month </li>
-                  {% else %}
-                    <li> ${{property['price']}} </li>
-                  {% endif %}
-                </div>
-                <div class='property-info'>
-                  <li> Floor Area: {{property['squareFeet']}} square ft.</li>
-                  {% if property['lotSize'] != 0 %}
-                    <li> Lot size: {{property['lotSize']}} square ft.</li>
-                  {% endif%}
-                </div>
-                <br>
-                <a href="{{ url_for('edit_property.edit_property', property_id=property['id']) }}">Edit Property</a>
-                <br>
-                <br>
-                <hr>
-                
-            </ul>
-        </td>
-    </tr>
-  </table>
-  {% endfor %}
+                  <div class='property-info'>
+                    <div class='bed-bath-num'>
+                      <li> {{property['bedroomNum']}}</li>
+                      <img src="../static/bedroom-icon.png" alt="bedroom icon">
+                      <li> {{property['bathroomNum']}}</li>
+                      <img src="../static/bathroom-icon.png" alt="bedroom icon">
+                    </div>
+                    {% if property['offerType'] == 'rent'%}
+                      <li> ${{property['price']}} / month </li>
+                    {% else %}
+                      <li> ${{property['price']}} </li>
+                    {% endif %}
+                  </div>
+                  <div class='property-info'>
+                    <li> Floor Area: {{property['squareFeet']}} square ft.</li>
+                    {% if property['lotSize'] != 0 %}
+                      <li> Lot size: {{property['lotSize']}} square ft.</li>
+                    {% endif%}
+                  </div>
+                  <br>
+                  <a href="{{ url_for('edit_property.edit_property', property_id=property['id']) }}">Edit Property</a>
+                  <br>
+                  <br>
+                  <hr>
+                  
+              </ul>
+          </td>
+      </tr>
+    </table>
+    {% endfor %}
+  
+  {% endif %}
   
 {% endblock %} 

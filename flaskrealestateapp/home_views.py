@@ -59,7 +59,6 @@ def index():
             query = {'bedroomNum': {'$gte': bedroomNum}}
             print(query)
             all_properties = properties.find(query)
-            print(all_properties[0])
 
         #if user inputs min num of bathrooms
         if (bathroomNum):
