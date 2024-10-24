@@ -1,83 +1,48 @@
-{% extends 'base.html' %}
-{% block content %}
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Real Estate App</title>
+        <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='styles.css') }}">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
 
-
-  <div class='search-options'>
-    <label for='sale-rent'> Buy/Rent:</label>
-    <select name="sale-rent" id="sale-rent">     
-        <option value="rent">Buy</option>
-        <option value="rent">Rent</option>
-    </select>
-    <button id='filter-button' type='submit'>Filter</button>
-    <div id='filter' >
-      <form method=post>
-        <div id='filter-price' class='from-to-filter'>
-          <p>Price: </p>
-          <label for="price_min">From:</label>
-          <input name='price_min' type='number'>
-          <label for="price_max">$     To:</label>
-          <input name='price_max' type='number'>
-        </div>
-        <div id='filter-bedroomNum' class='from-to-filter'>
-          <label for="bedroomNum">Number of Bedrooms: </label>
-          <input type="number" id="bedroomNum" name="bedroomNum">
-        </div>
-        <div id='filter-bathNum' class='from-to-filter'>
-          <label for="bathNum">Number of Bathrooms: </label>
-          <input type="number" id="bathNum" name="bathNum" >
-        </div>
-        <button  id='filter-button-submit' type='submit' value=SubmitFilter>Submit</button>
-      </form>
-    </div>
-  </div>
-
-  <hr>
-
-  <h1>Listings</h1>
-  {% if properties %}
-    {% for property in properties %}
-    <table id="properties">
-      <tr>
-          <td>
-              <ul class="properties-ul">
-                  <li>
-                    <img id="property-image" src="../static/uploads/{{property.id}}.jpg" alt='house'>
-                  </li>
-                  <div class='property-info'>
-                    <li> {{property['type']}} for <b>{{property['offerType']}}</b></li>
-                    <li><b>{{property['address']}}</b></li>
-                  </div>
-                  <div class='property-info'>
-                    <div class='bed-bath-num'>
-                      <li> {{property['bedroomNum']}}</li>
-                      <img src="../static/bedroom-icon.png" alt="bedroom icon">
-                      <li> {{property['bathroomNum']}}</li>
-                      <img src="../static/bathroom-icon.png" alt="bedroom icon">
-                    </div>
-                    {% if property['offerType'] == 'rent'%}
-                      <li> ${{property['price']}} / month </li>
-                    {% else %}
-                      <li> ${{property['price']}} </li>
-                    {% endif %}
-                  </div>
-                  <div class='property-info'>
-                    <li> Floor Area: {{property['squareFeet']}} square ft.</li>
-                    {% if property['lotSize'] != 0 %}
-                      <li> Lot size: {{property['lotSize']}} square ft.</li>
-                    {% endif%}
-                  </div>
-                  <br>
-                  <a href="{{ url_for('edit_property.edit_property', property_id=property['id']) }}">Edit Property</a>
-                  <br>
-                  <br>
-                  <hr>
-                  
+        <script src='../static/script.js' defer></script>
+    </head>
+    <body>
+      
+      <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+        <nav>
+          
+            <div class='navbar'>
+              <img id='logo' src='../static/Logo.png'>
+              <ul class='menu'>
+                <li>
+                  <a class='nav-link' href='{{ url_for('home_view.index') }}'>Home</a>
+                </li>
+                <li class='nav-item'>
+                  <a class='nav-link' href='{{ url_for('buy_view.buy_property') }}'>Buy</a>
+                </li>
+                <li class='nav-item'>
+                  <a class='nav-link' href='{{ url_for('rent_view.rent_property') }}'>Rent</a>
+                </li>
+                <li class='nav-item'>
+                    <a class='nav-link' href='{{ url_for('sell_view.sell_property') }}'>Sell</a>
+                </li>
               </ul>
-          </td>
-      </tr>
-    </table>
-    {% endfor %}
-  
-  {% endif %}
-  
-{% endblock %} 
+              <form class='form-inline my-2 my-lg-0'>
+                <input type='search' placeholder='Search' >
+                <button type='submit'>Search</button>
+              </form>
+                <a class='nav-link' href='#'>Login</a>
+            </div>
+          </nav>
+        
+          <hr>
+        {% block content %}
+        
+        {% endblock %}
+        <footer>
+
+        </footer>
+    </body>
+</html>

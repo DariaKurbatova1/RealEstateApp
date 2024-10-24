@@ -71,8 +71,8 @@ def index():
         
         
         
-        return render_template('index.html', properties=all_properties)
+        return render_template('index1.html', properties=all_properties)
     #select all properties
     all_properties = db.properties.find()
 
-    return render_template('index.html', properties=all_properties)
+    return render_template('index1.html', properties=all_properties)

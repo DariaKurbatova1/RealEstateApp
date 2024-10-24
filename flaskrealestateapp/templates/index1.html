@@ -1,0 +1,87 @@
+{% extends 'index.html' %}
+{% block content %}
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+</head>
+
+  <div class='search-options'>
+    <label for='sale-rent'> Buy/Rent:</label>
+    <select name="sale-rent" id="sale-rent">     
+        <option value="rent">Buy</option>
+        <option value="rent">Rent</option>
+    </select>
+    <button id='filter-button' type='submit'>Filter</button>
+    <div id='filter' >
+      <form method=post>
+        <div id='filter-price' class='from-to-filter'>
+          <p>Price: </p>
+          <label for="price_min">From:</label>
+          <input name='price_min' type='number'>
+          <label for="price_max">$     To:</label>
+          <input name='price_max' type='number'>
+        </div>
+        <div id='filter-bedroomNum' class='from-to-filter'>
+          <label for="bedroomNum">Number of Bedrooms: </label>
+          <input type="number" id="bedroomNum" name="bedroomNum">
+        </div>
+        <div id='filter-bathNum' class='from-to-filter'>
+          <label for="bathNum">Number of Bathrooms: </label>
+          <input type="number" id="bathNum" name="bathNum" >
+        </div>
+        <button  id='filter-button-submit' type='submit' value=SubmitFilter>Submit</button>
+      </form>
+    </div>
+  </div>
+
+  <hr>
+
+  <h1>Listings</h1>
+  {% if properties %}
+    {% for property in properties %}
+    <table id="properties">
+      <tr>
+          <td>
+              <ul class="properties-ul">
+                  <li>
+                    <img id="property-image" src="../static/uploads/{{property.id}}.jpg" alt='house'>
+                  </li>
+                  <div class='property-info'>
+                    <li> {{property['type']}} for <b>{{property['offerType']}}</b></li>
+                    <li><b>{{property['address']}}</b></li>
+                  </div>
+                  <div class='property-info'>
+                    <div class='bed-bath-num'>
+                      <li> {{property['bedroomNum']}}</li>
+                      <img src="../static/bedroom-icon.png" alt="bedroom icon">
+                      <li> {{property['bathroomNum']}}</li>
+                      <img src="../static/bathroom-icon.png" alt="bedroom icon">
+                    </div>
+                    {% if property['offerType'] == 'rent'%}
+                      <li> ${{property['price']}} / month </li>
+                    {% else %}
+                      <li> ${{property['price']}} </li>
+                    {% endif %}
+                  </div>
+                  <div class='property-info'>
+                    <li> Floor Area: {{property['squareFeet']}} square ft.</li>
+                    {% if property['lotSize'] != 0 %}
+                      <li> Lot size: {{property['lotSize']}} square ft.</li>
+                    {% endif%}
+                  </div>
+                  <br>
+                  <a href="{{ url_for('edit_property.edit_property', property_id=property['id']) }}">Edit Property</a>
+                  <br>
+                  <br>
+                  <hr>
+                  
+              </ul>
+          </td>
+      </tr>
+    </table>
+    {% endfor %}
+  
+  {% endif %}
+  
+{% endblock %} 
