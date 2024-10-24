@@ -40,7 +40,9 @@
     <p><input name='lotSize' type='number' value={{property['lotSize']}}></p>
 
     <p><b><label for="img">Change Image:</label></b></p>
-    <img id="property-image" src="../static/uploads/{{property.id}}.jpg" alt='house'>
+    <div class="text-center">
+        <img id="property-image" src="../static/uploads/{{property.id}}.jpg" class="rounded" alt="house">
+    </div>
     <p><input type=file name=file>
 
     <input type=submit value=Submit></input>
