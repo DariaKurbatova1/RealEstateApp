@@ -7,31 +7,49 @@
 </head>
 
   <div class='search-options'>
-    <label for='sale-rent'> Buy/Rent:</label>
-    <select name="sale-rent" id="sale-rent">     
-        <option value="rent">Buy</option>
-        <option value="rent">Rent</option>
-    </select>
-    <button id='filter-button' type='submit'>Filter</button>
+    <label for="sale-rent">Buy/Rent:</label>
+    <div class="dropdown mb-3">
+        <button class="btn btn-secondary dropdown-toggle" type="button" id="sale-rent" data-bs-toggle="dropdown" aria-expanded="false">
+            Select Option
+        </button>
+        <ul class="dropdown-menu" aria-labelledby="sale-rent">
+            <li><a class="dropdown-item" href="#" data-value="buy">Buy</a></li>
+            <li><a class="dropdown-item" href="#" data-value="rent">Rent</a></li>
+        </ul>
+    </div>
+    <button id="filter-button" type="submit" class="btn btn-primary">Filter</button>
+
     <div id='filter' >
-      <form method=post>
-        <div id='filter-price' class='from-to-filter'>
-          <p>Price: </p>
-          <label for="price_min">From:</label>
-          <input name='price_min' type='number'>
-          <label for="price_max">$     To:</label>
-          <input name='price_max' type='number'>
+      <form method="post">
+        <div id="filter-price" class="from-to-filter mb-3">
+            <p>Price:</p>
+            <div class="input-group mb-2">
+                <label for="price_min" class="input-group-text">From:</label>
+                <input name="price_min" type="number" class="form-control" aria-label="Price minimum" id="price_min">
+            </div>
+            <div class="input-group mb-2">
+                <label for="price_max" class="input-group-text">To:</label>
+                <input name="price_max" type="number" class="form-control" aria-label="Price maximum" id="price_max">
+            </div>
         </div>
-        <div id='filter-bedroomNum' class='from-to-filter'>
-          <label for="bedroomNum">Number of Bedrooms: </label>
-          <input type="number" id="bedroomNum" name="bedroomNum">
+        
+        <div id="filter-bedroomNum" class="from-to-filter mb-3">
+            <label for="bedroomNum" class="input-group-text">Number of Bedrooms:</label>
+            <div class="input-group">
+                <input type="number" id="bedroomNum" name="bedroomNum" class="form-control" aria-label="Number of Bedrooms">
+            </div>
         </div>
-        <div id='filter-bathNum' class='from-to-filter'>
-          <label for="bathNum">Number of Bathrooms: </label>
-          <input type="number" id="bathNum" name="bathNum" >
+    
+        <div id="filter-bathNum" class="from-to-filter mb-3">
+            <label for="bathNum" class="input-group-text">Number of Bathrooms:</label>
+            <div class="input-group">
+                <input type="number" id="bathNum" name="bathNum" class="form-control" aria-label="Number of Bathrooms">
+            </div>
         </div>
-        <button  id='filter-button-submit' type='submit' value=SubmitFilter>Submit</button>
-      </form>
+    
+        <button id="filter-button-submit" type="submit" class="btn btn-primary">Submit</button>
+    </form>
+    
     </div>
   </div>
 
