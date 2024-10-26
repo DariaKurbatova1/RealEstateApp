@@ -18,6 +18,8 @@ bp = Blueprint('home_view', __name__, url_prefix='/')
 def index():
     all_properties = '' 
     if request.method == 'POST':
+        query = {}
+
         #get form value 
         price_min = (request.form['price_min'])
         price_max = (request.form['price_max'])
@@ -27,46 +29,24 @@ def index():
         if (price_min == '#'):
             pass
         
+        
+        
         #if user does not fill filter form
         all_properties = db.properties.find()
         #if user inputs a min price
-        if (price_min and price_max is None):
-            price_min = int(price_min)
-            query = {'price': {'$gt': price_min}}
-            print(query)
-            all_properties = properties.find(query)
-            print(all_properties[0])
-        #if user inputs a max price
-        if (price_max and price_min is None):
-            price_max = int(price_max)
-            query = {'price': {'$lt': price_max}}
-            print(query)
-            all_properties = properties.find(query)
-            print(all_properties[0])
-        #if user inputs a min price and max price
-        if (price_min and price_max):
-            price_min = int(price_min)
-            price_max = int(price_max)
-            query = {'$and': [{'price': {'$gt': price_min},'price': {'$lt': price_max}}]}
-            print(query)
-            all_properties = properties.find(query)
-            print(all_properties[0])
-        
-        #if user inputs min num of bedrooms
-        if (bedroomNum):
-            bedroomNum = int(bedroomNum)
-            print(bedroomNum)
-            query = {'bedroomNum': {'$gte': bedroomNum}}
-            print(query)
-            all_properties = properties.find(query)
+        if price_min:
+            query['price'] = query.get('price', {})
+            query['price']['$gte'] = int(price_min)
+        if price_max:
+            query['price'] = query.get('price', {})
+            query['price']['$lte'] = int(price_max)
+        if bedroomNum:
+            query['bedroomNum'] = {'$gte': int(bedroomNum)}
+        if bathroomNum:
+            query['bathroomNum'] = {'$gte': int(bathroomNum)}
 
-        #if user inputs min num of bathrooms
-        if (bathroomNum):
-            bathroomNum = int(bathroomNum)
-            query = {'bathroomNum': {'$gte': bathroomNum}}
-            print(query)
-            all_properties = properties.find(query)
-            print(all_properties[0])
+        #find properties matching query
+        all_properties = properties.find(query)
         
         
         
