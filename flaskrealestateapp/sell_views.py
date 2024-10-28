@@ -31,36 +31,38 @@ def sell_property():
             #get form value and insert new record
             offerType = request.form.get('offerType')
             if not offerType:
-                flash("Offer type is required.")
+                flash("Offer type is required.", "error")
             type = request.form.get('type')
             if not type:
-                flash("Type is required.")
+                flash("Type is required.", "error")
             price = int(request.form.get('price'))
             if price <= 0:
-                flash("Price must be a positive number.")
+                flash("Price must be a positive number.", "error")
                 return redirect(request.url)
             address = request.form.get('address')
             if not address:
-                flash("Address is required.")
+                flash("Address is required.", "error")
                 return redirect(request.url)
             bedroomNum = int(request.form.get('bedroomNum'))
             if bedroomNum < 0:
-                flash("Number of bedrooms cannot be negative.")
+                flash("Number of bedrooms cannot be negative.", "error")
                 return redirect(request.url)
             bathroomNum = int(request.form.get('bathroomNum'))
             if bathroomNum < 0:
-                flash("Number of bathrooms cannot be negative.")
+                flash("Number of bathrooms cannot be negative.", "error")
                 return redirect(request.url)
             squareFeet = request.form.get('squareFeet')
-            if squareFeet <= 0:
-                flash("Square feet must be a positive number.")
+            squareFeet = int(squareFeet)
+            if squareFeet < 0:
+                flash("Square feet must be a positive number.", "error")
                 return redirect(request.url)
             lotSize = request.form.get('lotSize')
-            if lotSize <= 0:
-                flash("Lot size must be a positive number.")
+            lotSize = int(lotSize)
+            if lotSize < 0:
+                flash("Lot size must be a positive number.", "error")
                 return redirect(request.url)
         except ValueError:
-            flash("Please enter valid numeric values for price, bedroom and bathroom counts, square feet, and lot size.")
+            flash("Please enter valid numeric values for price, bedroom and bathroom counts, square feet, and lot size.", "error")
             return redirect(request.url)
         properties.insert_one({
             'id': new_id,
@@ -75,13 +77,13 @@ def sell_property():
         #get the id of newly inserted record
         #upload file
         if 'file' not in request.files:
-            flash("File upload is required.")
+            flash("File upload is required.", "error")
             return redirect(request.url)
         file = request.files['file']
         # If the user does not select a file, the browser submits an
         # empty file without a filename.
         if file.filename == '':
-            flash('No selected file')
+            flash('No selected file', "error")
             print('No selected file')
             return redirect(request.url)
         if file and allowed_file(file.filename):
@@ -91,6 +93,8 @@ def sell_property():
             file_extention = '.'+filename.rsplit('.', 1)[1].lower()
             new_filename = new_id + file_extention
             file.save(os.path.join(basedir, app.config['UPLOAD_FOLDER'], (new_id+'.jpg')))
+            
+            flash("Property added successfully!", "success")
             
             return redirect(url_for('home_view.index'))
         return redirect(url_for('home_view.index'))
