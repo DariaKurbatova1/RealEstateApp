@@ -1,4 +1,4 @@
-from flask import (Blueprint, render_template, request)
+from flask import (Blueprint, render_template, request, flash, redirect, url_for)
 # from . import app
 from flaskrealestateapp.property import Property
 from flask import Flask
@@ -56,3 +56,9 @@ def index():
     all_properties = db.properties.find()
 
     return render_template('index1.html', properties=all_properties)
+
+@bp.route("/delete/<property_id>", methods=['POST'])
+def delete_property(property_id):
+    properties.delete_one({'id': int(property_id)})
+    flash("Property deleted successfully!", "success")
+    return redirect(url_for('home_view.index'))
