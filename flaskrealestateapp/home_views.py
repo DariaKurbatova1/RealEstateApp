@@ -16,18 +16,21 @@ bp = Blueprint('home_view', __name__, url_prefix='/')
 
 @bp.route("/", methods=['GET', 'POST'])
 def index():
-    all_properties = '' 
+    #all_properties = '' 
     if request.method == 'POST':
+        #get search query
+        search_query = request.form.get('search_query', '').strip()
         query = {}
 
         #get form value 
-        price_min = (request.form['price_min'])
-        price_max = (request.form['price_max'])
-        bedroomNum = (request.form['bedroomNum'])
-        bathroomNum = (request.form['bathNum'])
-        #validation
-        if (price_min == '#'):
-            pass
+        price_min = (request.form.get('price_min'))
+        price_max = (request.form.get('price_max'))
+        bedroomNum = (request.form.get('bedroomNum'))
+        bathroomNum = (request.form.get('bathNum'))
+        
+        if search_query:
+            query['address'] = search_query
+
         
         
         
