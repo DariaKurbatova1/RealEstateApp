@@ -44,6 +44,12 @@ def create_app(test_config=None):
     
     from .rent_views import bp as rent_property_bp
     app.register_blueprint(rent_property_bp)
+    
+    from .login_views import bp as login_bp
+    app.register_blueprint(login_bp)
+    
+    from .sign_up_views import bp as sign_up_bp
+    app.register_blueprint(sign_up_bp)
 
     # a simple page that says hello
     @app.route('/hello')

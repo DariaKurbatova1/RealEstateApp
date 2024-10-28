@@ -36,7 +36,7 @@
                 <a class="nav-link" href="{{ url_for('sell_view.sell_property') }}">Sell</a>
               </li>
               <li class="nav-item">
-                <a class="nav-link" href="#">Login</a>
+                <a class="nav-link" href="{{ url_for('login_view.login') }}">Login</a>
               </li>
             </ul>
             <form class="d-flex" role="search" method="POST" action="{{ url_for('home_view.index') }}">
