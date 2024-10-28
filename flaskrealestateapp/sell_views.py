@@ -32,12 +32,33 @@ def sell_property():
             offerType = request.form.get('offerType')
             if not offerType:
                 flash("Offer type is required.")
-            price = int(request.form['price'])
-            address = request.form['address']
-            bedroomNum = int(request.form['bedroomNum'])
-            bathroomNum = int(request.form['bathroomNum'])
-            squareFeet = request.form['squareFeet']
-            lotSize = request.form['lotSize']
+            type = request.form.get('type')
+            if not type:
+                flash("Type is required.")
+            price = int(request.form.get('price'))
+            if price <= 0:
+                flash("Price must be a positive number.")
+                return redirect(request.url)
+            address = request.form.get('address')
+            if not address:
+                flash("Address is required.")
+                return redirect(request.url)
+            bedroomNum = int(request.form.get('bedroomNum'))
+            if bedroomNum < 0:
+                flash("Number of bedrooms cannot be negative.")
+                return redirect(request.url)
+            bathroomNum = int(request.form.get('bathroomNum'))
+            if bathroomNum < 0:
+                flash("Number of bathrooms cannot be negative.")
+                return redirect(request.url)
+            squareFeet = request.form.get('squareFeet')
+            if squareFeet <= 0:
+                flash("Square feet must be a positive number.")
+                return redirect(request.url)
+            lotSize = request.form.get('lotSize')
+            if lotSize <= 0:
+                flash("Lot size must be a positive number.")
+                return redirect(request.url)
         except ValueError:
             flash("Please enter valid numeric values for price, bedroom and bathroom counts, square feet, and lot size.")
             return redirect(request.url)
