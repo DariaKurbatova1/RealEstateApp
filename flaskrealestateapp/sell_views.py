@@ -75,14 +75,13 @@ def sell_property():
         #get the id of newly inserted record
         #upload file
         if 'file' not in request.files:
-            #flash('No file part')
-            print('No file part')
+            flash("File upload is required.")
             return redirect(request.url)
         file = request.files['file']
         # If the user does not select a file, the browser submits an
         # empty file without a filename.
         if file.filename == '':
-            #flash('No selected file')
+            flash('No selected file')
             print('No selected file')
             return redirect(request.url)
         if file and allowed_file(file.filename):
