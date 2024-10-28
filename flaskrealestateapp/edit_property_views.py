@@ -1,4 +1,4 @@
-from flask import (Blueprint, render_template, request, redirect, url_for)
+from flask import (Blueprint, render_template, request, redirect, url_for, flash)
 # from . import app
 from flaskrealestateapp.property import Property
 from flask import Flask
@@ -27,15 +27,33 @@ def edit_property(property_id):
     property = properties.find_one({'id':property_id})
     
     if request.method == 'POST':
-        #validation
-        ###
         #get form value and insert new record
-        price = request.form['price']
-        bedroomNum = request.form['bedroomNum']
-        bathroomNum = request.form['bathroomNum']
-        squareFeet = request.form['squareFeet']
-        lotSize = request.form['lotSize']
-        
+        try:
+            price = int(request.form.get('price'))
+            if price <= 0:
+                flash("Price must be a positive number.", "error")
+                return redirect(request.url)
+            bedroomNum = int(request.form.get('bedroomNum'))
+            if bedroomNum < 0:
+                flash("Number of bedrooms cannot be negative.", "error")
+                return redirect(request.url)
+            bathroomNum = int(request.form.get('bathroomNum'))
+            if bathroomNum < 0:
+                flash("Number of bathrooms cannot be negative.", "error")
+                return redirect(request.url)
+            squareFeet = request.form.get('squareFeet')
+            squareFeet = int(squareFeet)
+            if squareFeet < 0:
+                flash("Square feet must be a positive number.", "error")
+                return redirect(request.url)
+            lotSize = request.form.get('lotSize')
+            lotSize = int(lotSize)
+            if lotSize < 0:
+                flash("Lot size must be a positive number.", "error")
+                return redirect(request.url)
+        except ValueError:
+            flash("Please enter valid numeric values for price, bedroom and bathroom counts, square feet, and lot size.", "error")
+            return redirect(request.url)
         #delete the old version of the property
         query = {"address": property['address']}
         properties.delete_one(query)
@@ -54,6 +72,7 @@ def edit_property(property_id):
         #upload new picture
         if 'file' not in request.files:
             #flash('No file part')
+            flash("File upload is required.", "error")
             print('No file part')
             return redirect(request.url)
         file = request.files['file']
@@ -61,6 +80,8 @@ def edit_property(property_id):
             filename = secure_filename(file.filename)
             basedir = os.path.abspath(os.path.dirname(__file__))
             file.save(os.path.join(basedir, app.config['UPLOAD_FOLDER'], (str(property_id)+'.jpg')))
+            
+        flash("Property edited successfully!", "success")
         return redirect(url_for('home_view.index'))
         #delete the old instance of the record
     
