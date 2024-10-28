@@ -1,8 +1,9 @@
-from flask import (Blueprint, render_template, request, redirect, url_for)
+from flask import (Blueprint, render_template, request, redirect, url_for, flash)
 from flaskrealestateapp.property import Property
 from flask import Flask
 from pymongo import MongoClient
 from werkzeug.utils import secure_filename
+
 import os
 
 #create db client
@@ -24,16 +25,22 @@ bp = Blueprint('sell_view', __name__, url_prefix='/sell/')
 @bp.route("/", methods=['GET', 'POST'])
 def sell_property():
     if request.method == 'POST':
-        #get the id of newly inserted record
-        new_id = (db.properties.count_documents({}))+1
-        #get form value and insert new record
-        offerType = request.form['offerType']
-        price = int(request.form['price'])
-        address = request.form['address']
-        bedroomNum = int(request.form['bedroomNum'])
-        bathroomNum = int(request.form['bathroomNum'])
-        squareFeet = request.form['squareFeet']
-        lotSize = request.form['lotSize']
+        try:
+            #get the id of newly inserted record
+            new_id = (db.properties.count_documents({}))+1
+            #get form value and insert new record
+            offerType = request.form.get('offerType')
+            if not offerType:
+                flash("Offer type is required.")
+            price = int(request.form['price'])
+            address = request.form['address']
+            bedroomNum = int(request.form['bedroomNum'])
+            bathroomNum = int(request.form['bathroomNum'])
+            squareFeet = request.form['squareFeet']
+            lotSize = request.form['lotSize']
+        except ValueError:
+            flash("Please enter valid numeric values for price, bedroom and bathroom counts, square feet, and lot size.")
+            return redirect(request.url)
         properties.insert_one({
             'id': new_id,
             'offerType': offerType,

@@ -65,18 +65,11 @@ br {
 body{
     background-color: rgb(10, 8, 64);
     color: white;
-    margin: 5vw;
-}
-a{
-    color: gold;
+    padding: 20px;
 }
 #logo{
     max-width: 20vw;
 }
-h1{
-    color: gold;
-}
-
 
 
 
