@@ -39,7 +39,7 @@ def index():
         
         
         #if user does not fill filter form
-        all_properties = db.properties.find()
+        all_properties = list(db.properties.find())
         #if user inputs a min price
         if price_min:
             query['price'] = query.get('price', {})
@@ -53,14 +53,14 @@ def index():
             query['bathroomNum'] = {'$gte': int(bathroomNum)}
 
         #find properties matching query
-        all_properties = properties.find(query)
+        all_properties = list(properties.find(query)) 
         
         
         
         
         return render_template('index1.html', properties=all_properties)
     #select all properties
-    all_properties = db.properties.find()
+    all_properties = list(db.properties.find())
 
     return render_template('index1.html', properties=all_properties)
 

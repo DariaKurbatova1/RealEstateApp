@@ -46,7 +46,7 @@
   <hr>
 
   <h1>Listings</h1>
-  {% if properties %}
+  {% if properties|length > 0 %}
     {% for property in properties %}
     <table id="properties">
       <tr>
@@ -99,7 +99,7 @@
     </table>
     {% endfor %}
   {% else %}
-    <h1>No properties found...</h1>
+    <h2>No properties found...</h2>
   {% endif %}
   
 {% endblock %} 
