@@ -1,4 +1,4 @@
-from flask import (Blueprint, render_template, request, redirect, url_for, flash)
+from flask import (Blueprint, render_template, request, redirect, url_for, flash, session)
 from flaskrealestateapp.property import Property
 from flask import Flask
 from pymongo import MongoClient
@@ -33,6 +33,7 @@ def login():
         #check if user exists
         user = users.find_one({'email': email})
         if user and check_password_hash(user['password'], password):
+            session['user_id'] = str(user['_id'])
             flash("Login successful!", "success")
             return redirect(url_for('home_view.index'))  
         else:
