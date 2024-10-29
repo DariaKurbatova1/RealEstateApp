@@ -1,0 +1,10 @@
+{% extends 'index.html' %}
+{% block content %}
+<div class='properties-list'>
+    <ul>
+        {% for property in properties %}
+        <li>{{property.type}}</li>
+        {% endfor %}
+    </ul>
+</div>
+{% endblock %}

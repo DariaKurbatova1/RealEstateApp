@@ -1,0 +1,92 @@
+{% extends 'index.html' %}
+{% block content %}
+<h1>Sell or Rent Your Property</h1>
+<form method=post enctype=multipart/form-data>
+
+
+    <p><b><label for="offerType">For Sale/Rent</label></b></p>
+    <div class="form-check">
+        <input class="form-check-input" type="radio" name="offerType" value="sale" id="sale">
+        <label class="form-check-label" for="sale">
+            For Sale
+        </label>
+    </div>
+    <div class="form-check">
+        <input class="form-check-input" type="radio" name="offerType" value="rent" id="rent">
+        <label class="form-check-label" for="rent">
+            For Rent
+        </label>
+    </div>
+
+    <p><b><label for="type">Property type</label></b></p>
+    <div class="form-check">
+        <input class="form-check-input" type="radio" name="type" value="condo" id="condo">
+        <label class="form-check-label" for="condo">
+            Condo
+        </label>
+    </div>
+    <div class="form-check">
+        <input class="form-check-input" type="radio" name="type" value="house" id="house">
+        <label class="form-check-label" for="house">
+            House
+        </label>
+    </div>
+    <div class="form-check">
+        <input class="form-check-input" type="radio" name="type" value="lot" id="lot">
+        <label class="form-check-label" for="lot">
+            Lot
+        </label>
+    </div>
+
+
+
+
+    
+    <p><b><label for="price">Price</label></b></p>
+    <p>Enter the property price if it is for sale, or the monthly rent amount if it is for rent.</p>
+    <div class="input-group mb-3">
+        <span class="input-group-text" id="price-addon">$</span>
+        <input type="number" class="form-control" name="price" aria-label="Price" aria-describedby="price-addon">
+    </div>
+
+    <p><b><label for="address">Address</label></b></p>
+    <div class="input-group mb-3">
+        <span class="input-group-text" id="address-addon">🏠</span>
+        <input type="text" class="form-control" name="address" placeholder="Enter address" aria-label="Address" aria-describedby="address-addon">
+    </div>
+
+    <p><b><label for="bedroomNum">Number of Bedrooms</label></b></p>
+    <div class="input-group mb-3">
+        <span class="input-group-text" id="bedroomNum-addon">🛏️</span>
+        <input type="number" class="form-control" name="bedroomNum" aria-label="Number of Bedrooms" aria-describedby="bedroomNum-addon">
+    </div>
+
+    <p><b><label for="bathroomNum">Number of Bathrooms</label></b></p>
+    <div class="input-group mb-3">
+        <span class="input-group-text" id="bathroomNum-addon">🚿</span>
+        <input type="number" class="form-control" name="bathroomNum" aria-label="Number of Bathrooms" aria-describedby="bathroomNum-addon">
+    </div>
+
+    <p><b><label for="squareFeet">Square Feet</label></b></p>
+    <div class="input-group mb-3">
+        <span class="input-group-text" id="squareFeet-addon">📏</span>
+        <input type="number" class="form-control" name="squareFeet" aria-label="Square Feet" aria-describedby="squareFeet-addon">
+    </div>
+
+    <p><b><label for="lotSize">Lot Size</label></b></p>
+    <div class="input-group mb-3">
+        <span class="input-group-text" id="lotSize-addon">🌳</span>
+        <input type="number" class="form-control" name="lotSize" aria-label="Lot Size" aria-describedby="lotSize-addon">
+    </div>
+
+    <div class="mb-3">
+        <label for="formFileLg" class="form-label">Upload Property Image:</label>
+        <input class="form-control form-control-lg" id="formFileLg" type="file" name="file">
+    </div>
+
+    <input type=submit value=Submit></input>
+
+
+</form>
+
+{% endblock %} 

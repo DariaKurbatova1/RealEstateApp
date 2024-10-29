@@ -1,0 +1,76 @@
+nav {
+    display: flex;
+    align-items: center;
+    font-weight: bolder;
+}
+.navbar{
+    display: flex;
+    align-items: center;
+}
+.menu{
+    display: flex;
+    list-style-type: none;
+}
+
+.navbar a{
+    text-decoration: none;
+    padding-left: 20px;
+    padding-right: 20px;
+}
+
+.search-options > select, button{
+    margin-right: 40px;
+}
+br {
+    color: black;
+}
+#properties{
+    display: flex;
+    justify-content: center;
+}
+.properties-ul{
+    list-style-type: none;
+}
+#property-image{
+    width:100%;
+    max-width:600px;
+}
+.bed-bath-num{
+    display: flex;
+}
+.bed-bath-num > img{
+    width: 100%;
+    max-width: 20px;
+}
+.bed-bath-num > li{
+    padding-right: 5px;
+    padding-left: 5px;
+}
+.property-info{
+    display: flex;
+    justify-content: space-between;
+}
+#filter{
+    border: 1px solid white;
+    margin:20px;
+    padding: 20px;
+}
+.from-to-filter{
+    display: flex;
+    align-items: baseline;
+}
+.from-to-filter > * {
+    margin: 10px;
+}
+body{
+    background-color: rgb(10, 8, 64);
+    color: white;
+    padding: 20px;
+    list-style-type: none;
+}
+#logo{
+    max-width: 20vw;
+}
+
+
+

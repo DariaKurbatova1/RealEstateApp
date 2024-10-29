@@ -1,0 +1,52 @@
+{% extends 'index.html' %}
+{% block content %}
+<h1>Edit Property at {{property['address']}}</h1>
+<form method=post enctype=multipart/form-data>
+    <p><b><label for="offerType">For Sale/Rent</label></b></p>
+    <p>
+        <input 
+        name='offerType' 
+        type='radio' 
+        value='sale'
+        {% if property['offerType'] == 'sale'%}
+        checked>
+        {% endif %}
+        <label for='sale'>For Sale</label>
+    </p>
+    <p>
+        <input 
+        name='offerType' 
+        type='radio' 
+        value='rent'
+        {% if property['offerType'] == 'rent'%}
+        checked>
+        {% endif %}
+        <label for='rent'>For Rent</label>
+    </p>
+
+    <p><b><label for="price">Price</label></b></p>
+    <p><input name='price' type='number' value={{property['price']}}></p>
+
+    <p><b><label for="bedroomNum">Number of Bedrooms</label></b></p>
+    <p><input name='bedroomNum' type='number' value={{property['bedroomNum']}}></p>
+
+    <p><b><label for="bathroomNum">Number of Bathrooms</label></b></p>
+    <p><input name='bathroomNum' type='number' value={{property['bathroomNum']}}></p>
+
+    <p><b><label for="squareFeet">Square Feet</label></b></p>
+    <p><input name='squareFeet' type='number' value={{property['squareFeet']}}></p>
+
+    <p><b><label for="lotSize">Lot Size</label></b></p>
+    <p><input name='lotSize' type='number' value={{property['lotSize']}}></p>
+
+    <p><b><label for="img">Change Image:</label></b></p>
+    <div class="text-center">
+        <img id="property-image" src="../static/uploads/{{property.id}}.jpg" class="rounded" alt="house">
+    </div>
+    <p><input type=file name=file>
+
+    <input type=submit value=Submit></input>
+
+</form>
+
+{% endblock %} 

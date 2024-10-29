@@ -1,0 +1,93 @@
+{% extends 'index.html' %}
+{% block content %}
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+</head>
+
+  <div class='search-options' >
+    <button id="filter-button" type="submit" class="btn btn-primary">Filter</button>
+
+    <div id='filter' >
+      <form method="post">
+        <div id="filter-price" class="from-to-filter mb-3">
+            <p>Price:</p>
+            <div class="input-group mb-2">
+                <label for="price_min" class="input-group-text">From:</label>
+                <input name="price_min" type="number" class="form-control" aria-label="Price minimum" id="price_min">
+            </div>
+            <div class="input-group mb-2">
+                <label for="price_max" class="input-group-text">To:</label>
+                <input name="price_max" type="number" class="form-control" aria-label="Price maximum" id="price_max">
+            </div>
+        </div>
+        
+        <div id="filter-bedroomNum" class="from-to-filter mb-3">
+            <label for="bedroomNum" class="input-group-text">Number of Bedrooms:</label>
+            <div class="input-group">
+                <input type="number" id="bedroomNum" name="bedroomNum" class="form-control" aria-label="Number of Bedrooms">
+            </div>
+        </div>
+    
+        <div id="filter-bathNum" class="from-to-filter mb-3">
+            <label for="bathNum" class="input-group-text">Number of Bathrooms:</label>
+            <div class="input-group">
+                <input type="number" id="bathNum" name="bathNum" class="form-control" aria-label="Number of Bathrooms">
+            </div>
+        </div>
+    
+        <button id="filter-button-submit" type="submit" class="btn btn-primary">Submit</button>
+    </form>
+    
+    </div>
+  </div>
+
+  <hr>
+
+  <h1>Listings</h1>
+  {% if properties|length > 0 %}
+  <div class="row">
+    {% for property in properties %}
+    <div class="col-md-6"> 
+      <div class="property-card border rounded p-3 mb-4 text-center">
+                      <img id="property-image" src="../static/uploads/{{property.id}}.jpg" class="rounded" alt="house">
+                  <div class='property-info'>
+                    <li> {{property['type']}} for <b>{{property['offerType']}}</b></li>
+                    <li><b>{{property['address']}}</b></li>
+                  </div>
+                  <div class='property-info'>
+                    <div class='bed-bath-num'>
+                      <li> {{property['bedroomNum']}}</li>
+                      <img src="../static/bedroom-icon.png" alt="bedroom icon">
+                      <li> {{property['bathroomNum']}}</li>
+                      <img src="../static/bathroom-icon.png" alt="bedroom icon">
+                    </div>
+                    {% if property['offerType'] == 'rent'%}
+                      <li> ${{property['price']}} / month </li>
+                    {% else %}
+                      <li> ${{property['price']}} </li>
+                    {% endif %}
+                  </div>
+                  <div class='property-info'>
+                    <li> Floor Area: {{property['squareFeet']}} square ft.</li>
+                    {% if property['lotSize'] != 0 %}
+                      <li> Lot size: {{property['lotSize']}} square ft.</li>
+                    {% endif%}
+                  </div>
+                  {% if session.get('user_id') %}
+                    <form method="get" action="{{ url_for('edit_property.edit_property', property_id=property['id']) }}" style="display:inline;">
+                      <button type="submit" class="btn btn-primary">Edit Property</button>
+                    </form>                  
+                    <form method="post" action="{{ url_for('home_view.delete_property', property_id=property['id']) }}" style="display:inline;">
+                      <button type="submit" class="btn btn-danger">Delete Property</button>
+                    </form>
+                  {%endif%}
+          </div>
+        </div>
+    {% endfor %}
+  {% else %}
+    <h2>No properties found...</h2>
+  {% endif %}
+  </div>
+{% endblock %} 
