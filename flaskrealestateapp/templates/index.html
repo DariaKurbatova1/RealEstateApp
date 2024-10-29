@@ -45,7 +45,7 @@
               </li>
             </ul>
             <form class="d-flex" role="search" method="POST" action="{{ url_for('home_view.index') }}">
-              <input class="form-control me-2" type="search" placeholder="Search by address" aria-label="Search">
+              <input class="form-control me-2" type="search" name="search_query" placeholder="Search by address" aria-label="Search">
               <button class="btn btn-outline-success" type="submit">Search</button>
             </form>
           </div>

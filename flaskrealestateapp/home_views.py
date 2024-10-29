@@ -16,11 +16,15 @@ bp = Blueprint('home_view', __name__, url_prefix='/')
 
 @bp.route("/", methods=['GET', 'POST'])
 def index():
+    query = {}
+
     #all_properties = '' 
     if request.method == 'POST':
         #get search query
         search_query = request.form.get('search_query', '').strip()
-        query = {}
+        print(search_query)
+        if search_query and search_query != '':
+            query['address'] = {'$regex': search_query, '$options': 'i'}
 
         #get form value 
         price_min = (request.form.get('price_min'))
