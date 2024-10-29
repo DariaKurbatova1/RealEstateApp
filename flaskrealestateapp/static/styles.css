@@ -66,6 +66,7 @@ body{
     background-color: rgb(10, 8, 64);
     color: white;
     padding: 20px;
+    list-style-type: none;
 }
 #logo{
     max-width: 20vw;
