@@ -1,6 +1,6 @@
 {% extends 'index.html' %}
 {% block content %}
-<form>
+<form method="POST" action="{{ url_for('login_view.login') }}">
   <div class="form-group">
     <label for="exampleInputEmail1">Email address</label>
     <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter email">
