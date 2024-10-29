@@ -4,6 +4,8 @@ from flask import Flask
 from pymongo import MongoClient
 from werkzeug.utils import secure_filename
 import os
+from werkzeug.security import check_password_hash
+
 
 #create db client
 client = MongoClient('localhost', 27017)
@@ -31,7 +33,7 @@ def login():
         #check if user exists
         user = users.find_one({'email': email})
         if user and check_password_hash(user['password'], password):
-            flash("Login successful!")
+            flash("Login successful!", "success")
             return redirect(url_for('home_view.index'))  
         else:
             flash("Invalid email or password.")
