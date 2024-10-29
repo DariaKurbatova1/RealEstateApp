@@ -6,7 +6,7 @@
 
 </head>
 
-  <div class='search-options'>
+  <div class='search-options' >
     <button id="filter-button" type="submit" class="btn btn-primary">Filter</button>
 
     <div id='filter' >
@@ -47,16 +47,11 @@
 
   <h1>Listings</h1>
   {% if properties|length > 0 %}
+  <div class="row">
     {% for property in properties %}
-    <table id="properties">
-      <tr>
-          <td>
-              <ul class="properties-ul">
-                  <li>
-                    <div class="text-center">
+    <div class="col-md-6"> 
+      <div class="property-card border rounded p-3 mb-4 text-center">
                       <img id="property-image" src="../static/uploads/{{property.id}}.jpg" class="rounded" alt="house">
-                    </div>
-                  </li>
                   <div class='property-info'>
                     <li> {{property['type']}} for <b>{{property['offerType']}}</b></li>
                     <li><b>{{property['address']}}</b></li>
@@ -80,7 +75,6 @@
                       <li> Lot size: {{property['lotSize']}} square ft.</li>
                     {% endif%}
                   </div>
-                  <br>
                   {% if session.get('user_id') %}
                     <form method="get" action="{{ url_for('edit_property.edit_property', property_id=property['id']) }}" style="display:inline;">
                       <button type="submit" class="btn btn-primary">Edit Property</button>
@@ -89,17 +83,11 @@
                       <button type="submit" class="btn btn-danger">Delete Property</button>
                     </form>
                   {%endif%}
-                  <br>
-                  <br>
-                  <hr>
-                  
-              </ul>
-          </td>
-      </tr>
-    </table>
+          </div>
+        </div>
     {% endfor %}
   {% else %}
     <h2>No properties found...</h2>
   {% endif %}
-  
+  </div>
 {% endblock %} 
