@@ -1,5 +1,4 @@
 from flask import (Blueprint, render_template, request, redirect, url_for)
-from flaskrealestateapp.property import Property
 from flask import Flask
 from pymongo import MongoClient
 from werkzeug.utils import secure_filename
@@ -8,10 +7,13 @@ from flask import Blueprint, flash, redirect, render_template, request, url_for
 from werkzeug.security import generate_password_hash
 
 #create db client
-client = MongoClient('localhost', 27017)
-#create mongodb database
+# client = MongoClient('localhost', 27017)
+# #create mongodb database
+# db = client.flask_properties
+# #create collection
+# users = db.users
+client = MongoClient(os.environ.get("MONGO_URI"))
 db = client.flask_properties
-#create collection
 users = db.users
 
 bp = Blueprint('sign_up_view', __name__, url_prefix='/signup/')

@@ -1,5 +1,4 @@
 from flask import (Blueprint, render_template, request, redirect, url_for)
-from flaskrealestateapp.property import Property
 from flask import Flask
 import os
 from flask import Flask, flash, request, redirect, url_for
