@@ -71,6 +71,9 @@ body{
 #logo{
     max-width: 20vw;
 }
+#filter {
+    display: none; 
+}
 
 
 
