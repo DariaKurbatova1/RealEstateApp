@@ -3,6 +3,7 @@ from flask import Flask
 from pymongo import MongoClient
 from werkzeug.utils import secure_filename
 import os
+import gridfs
 
 #create db client
 # client = MongoClient('localhost', 27017)
@@ -10,9 +11,13 @@ import os
 # db = client.flask_properties
 # #create collection
 # properties = db.properties
+
+
 client = MongoClient(os.environ.get("MONGO_URI"))
 db = client.flask_properties
 properties = db.properties
+
+fs = gridfs.GridFS(db)
 
 UPLOAD_FOLDER = './static/uploads'
 ALLOWED_EXTENSIONS = {'txt', 'pdf', 'png', 'jpg', 'jpeg', 'gif'}
@@ -60,16 +65,16 @@ def edit_property(property_id):
         properties.delete_one(query)
         
         #insert new version of the property
-        properties.insert_one({
-            'id': property_id,
-            'offerType': property['offerType'],
-            'price': price,
-            'address': property['address'],
-            'bedroomNum': bedroomNum,
-            'bathroomNum': bathroomNum,
-            'squareFeet': squareFeet,
-            'lotSize': lotSize
-        })
+        properties.update_one(
+            {'id': property_id},
+            {'$set': {
+                'price': price,
+                'bedroomNum': bedroomNum,
+                'bathroomNum': bathroomNum,
+                'squareFeet': squareFeet,
+                'lotSize': lotSize
+            }}
+        )
         #upload new picture
         if 'file' not in request.files:
             #flash('No file part')
@@ -79,8 +84,13 @@ def edit_property(property_id):
         file = request.files['file']
         if file and allowed_file(file.filename):
             filename = secure_filename(file.filename)
-            basedir = os.path.abspath(os.path.dirname(__file__))
-            file.save(os.path.join(basedir, app.config['UPLOAD_FOLDER'], (str(property_id)+'.jpg')))
+            gridfs_id = fs.put(file, filename=filename, property_id=property_id)
+            properties.update_one(
+                {'id': property_id},
+                {'$set': {'image_id': gridfs_id}}
+            )
+            # basedir = os.path.abspath(os.path.dirname(__file__))
+            # file.save(os.path.join(basedir, app.config['UPLOAD_FOLDER'], (str(property_id)+'.jpg')))
             
         flash("Property edited successfully!", "success")
         return redirect(url_for('home_view.index'))
