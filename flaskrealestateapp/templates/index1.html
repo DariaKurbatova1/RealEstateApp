@@ -51,7 +51,7 @@
     {% for property in properties %}
     <div class="col-md-6"> 
       <div class="property-card border rounded p-3 mb-4 text-center">
-        <img id="property-image" src="data:image/jpeg;base64,{{ property.image }}" class="rounded" alt="house">
+        <img id="property-image" src="data:image/{{ property.image_type }};base64,{{ property.image }}" class="rounded" alt="house">
         <div class='property-info'>
                     <li> {{property['type']}} for <b>{{property['offerType']}}</b></li>
                     <li><b>{{property['address']}}</b></li>
