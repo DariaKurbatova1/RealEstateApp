@@ -6,6 +6,7 @@ import os
 import gridfs
 from PIL import Image
 import io
+import base64
 
 #create db client
 # client = MongoClient('localhost', 27017)
@@ -33,7 +34,11 @@ bp = Blueprint('edit_property', __name__, url_prefix='/edit_property/')
 def edit_property(property_id):
     #select the edited document
     property = properties.find_one({'id':property_id})
-    
+    existing_image = None
+    if 'image_id' in property:
+        image_file = fs.find_one({"_id": property['image_id']})
+        if image_file:
+            existing_image = base64.b64encode(image_file.read()).decode('utf-8')
     if request.method == 'POST':
         #get form value and insert new record
         try:
@@ -112,7 +117,7 @@ def edit_property(property_id):
     
     
 
-    return render_template('edit-property.html', property=property)
+    return render_template('edit-property.html', property=property, existing_image=existing_image)
 
 
 def allowed_file(filename):

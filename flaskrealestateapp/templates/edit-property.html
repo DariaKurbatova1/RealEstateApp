@@ -41,7 +41,7 @@
 
     <p><b><label for="img">Change Image:</label></b></p>
     <div class="text-center">
-        <img id="property-image" src="data:image/{{ property.image_type }};base64,{{ property.image }}" class="rounded" alt="house">
+        <img id="property-image" src="data:image/jpeg;base64,{{ existing_image }}" class="rounded" alt="house" style="max-width: 300px; max-height: 200px;">
     </div>
     <p><input type=file name=file>
 

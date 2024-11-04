@@ -4,7 +4,8 @@ from pymongo import MongoClient
 import gridfs
 import os
 import base64
-
+import io
+from PIL import Image
 
 #create db client
 # client = MongoClient('localhost', 27017)
