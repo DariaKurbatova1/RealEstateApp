@@ -1,17 +1,10 @@
 from flask import (Blueprint, render_template, request, redirect, url_for, flash, session)
 from flask import Flask
 from pymongo import MongoClient
-from werkzeug.utils import secure_filename
 import os
 from werkzeug.security import check_password_hash
 
 
-#create db client
-# client = MongoClient('localhost', 27017)
-# #create mongodb database
-# db = client.flask_properties
-# #create collection
-# users = db.users
 client = MongoClient(os.environ.get("MONGO_URI"))
 db = client.flask_properties
 users = db.users

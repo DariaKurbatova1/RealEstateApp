@@ -1,32 +1,20 @@
 from flask import (Blueprint, render_template, request, redirect, url_for, flash)
 from flask import Flask
 from pymongo import MongoClient
-from werkzeug.utils import secure_filename
 import os
 import gridfs
 from PIL import Image
 import io
 import base64
 
-#create db client
-# client = MongoClient('localhost', 27017)
-# #create mongodb database
-# db = client.flask_properties
-# #create collection
-# properties = db.properties
-
-
 client = MongoClient(os.environ.get("MONGO_URI"))
 db = client.flask_properties
 properties = db.properties
 
 fs = gridfs.GridFS(db)
-
-UPLOAD_FOLDER = './static/uploads'
-ALLOWED_EXTENSIONS = {'txt', 'pdf', 'png', 'jpg', 'jpeg', 'gif'}
+ALLOWED_EXTENSIONS = {'png', 'jpg', 'jpeg'}
 
 app = Flask(__name__)
-app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
 
 bp = Blueprint('edit_property', __name__, url_prefix='/edit_property/')
 
@@ -34,11 +22,15 @@ bp = Blueprint('edit_property', __name__, url_prefix='/edit_property/')
 def edit_property(property_id):
     #select the edited document
     property = properties.find_one({'id':property_id})
+    print(property)
     existing_image = None
     if 'image_id' in property:
         image_file = fs.find_one({"_id": property['image_id']})
         if image_file:
+            print('image found')
             existing_image = base64.b64encode(image_file.read()).decode('utf-8')
+        else:
+            print('image not found')
     if request.method == 'POST':
         #get form value and insert new record
         try:
@@ -67,9 +59,6 @@ def edit_property(property_id):
         except ValueError:
             flash("Please enter valid numeric values for price, bedroom and bathroom counts, square feet, and lot size.", "error")
             return redirect(request.url)
-        #delete the old version of the property
-        query = {"address": property['address']}
-        #properties.delete_one(query)
         
         #insert new version of the property
         properties.update_one(
@@ -100,22 +89,14 @@ def edit_property(property_id):
             img.save(buffer, format="JPEG")
             buffer.seek(0)
             #add pic to db
-            #filename = secure_filename(file.filename)
             gridfs_id = fs.put(buffer, filename=f"{property_id}.jpg", property_id=property_id)
             properties.update_one(
                 {'id': property_id},
                 {'$set': {'image_id': gridfs_id}}
             )
-            # basedir = os.path.abspath(os.path.dirname(__file__))
-            # file.save(os.path.join(basedir, app.config['UPLOAD_FOLDER'], (str(property_id)+'.jpg')))
             
         flash("Property edited successfully!", "success")
         return redirect(url_for('home_view.index'))
-        #delete the old instance of the record
-    
-    
-    
-    
 
     return render_template('edit-property.html', property=property, existing_image=existing_image)
 

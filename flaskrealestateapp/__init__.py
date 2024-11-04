@@ -1,5 +1,5 @@
 import os
-from flask import Flask, flash, render_template, current_app
+from flask import Flask
 
 
 
@@ -51,10 +51,5 @@ def create_app(test_config=None):
     
     from .sign_up_views import bp as sign_up_bp
     app.register_blueprint(sign_up_bp)
-
-    # a simple page that says hello
-    @app.route('/hello')
-    def hello():
-        return 'Hello, World!'
 
     return app

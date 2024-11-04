@@ -7,12 +7,6 @@ import base64
 import io
 from PIL import Image
 
-#create db client
-# client = MongoClient('localhost', 27017)
-# #create mongodb database
-# db = client.flask_properties
-# #create collection
-# properties = db.properties
 client = MongoClient(os.environ.get("MONGO_URI"))
 db = client.flask_properties
 properties = db.properties
@@ -22,8 +16,6 @@ bp = Blueprint('home_view', __name__, url_prefix='/')
 @bp.route("/", methods=['GET', 'POST'])
 def index():
     query = {}
-
-    #all_properties = '' 
     if request.method == 'POST':
         #get search query
         search_query = request.form.get('search_query', '').strip()
