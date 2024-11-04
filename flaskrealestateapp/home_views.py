@@ -75,7 +75,17 @@ def index():
 
 @bp.route("/delete/<property_id>", methods=['POST'])
 def delete_property(property_id):
-    properties.delete_one({'id': int(property_id)})
+    property_id = int(property_id)
+    property = properties.find_one({'id': property_id})
+    if not property:
+        flash("Property not found.", "error")
+        return redirect(url_for('home_view.index'))
+    
+    properties.delete_one({'id': property_id})
     fs.delete(fs.find_one({"property_id": int(property_id)})._id)
+    #delete image too
+    image = fs.find_one({"property_id": property_id})
+    if image:
+        fs.delete(image._id)
     flash("Property deleted successfully!", "success")
     return redirect(url_for('home_view.index'))
