@@ -4,6 +4,8 @@ from pymongo import MongoClient
 from werkzeug.utils import secure_filename
 import os
 import gridfs
+from PIL import Image
+import io
 
 #create db client
 # client = MongoClient('localhost', 27017)
@@ -62,7 +64,7 @@ def edit_property(property_id):
             return redirect(request.url)
         #delete the old version of the property
         query = {"address": property['address']}
-        properties.delete_one(query)
+        #properties.delete_one(query)
         
         #insert new version of the property
         properties.update_one(
@@ -83,8 +85,18 @@ def edit_property(property_id):
             return redirect(request.url)
         file = request.files['file']
         if file and allowed_file(file.filename):
-            filename = secure_filename(file.filename)
-            gridfs_id = fs.put(file, filename=filename, property_id=property_id)
+            #delete old pic
+            if 'image_id' in property:
+                fs.delete(property['image_id'])
+            #convert pic
+            img = Image.open(file)
+            img = img.convert("RGB")
+            buffer = io.BytesIO()
+            img.save(buffer, format="JPEG")
+            buffer.seek(0)
+            #add pic to db
+            #filename = secure_filename(file.filename)
+            gridfs_id = fs.put(buffer, filename=f"{property_id}.jpg", property_id=property_id)
             properties.update_one(
                 {'id': property_id},
                 {'$set': {'image_id': gridfs_id}}

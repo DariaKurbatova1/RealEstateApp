@@ -10,7 +10,7 @@ db = client.flask_properties
 properties = db.properties
 fs = gridfs.GridFS(db)
 
-ALLOWED_EXTENSIONS = {'txt', 'pdf', 'png', 'jpg', 'jpeg', 'gif'}
+ALLOWED_EXTENSIONS = {'jpeg'}
 
 app = Flask(__name__)
 
