@@ -57,8 +57,12 @@ def index():
             query['bathroomNum'] = {'$gte': int(bathroomNum)}
 
         #find properties matching query
-        all_properties = list(properties.find(query)) 
-        
+        all_properties = list(db.properties.find(query))
+        for property in all_properties:
+            image_file = fs.find_one({"property_id": property['id']})
+            if image_file:
+                image_data = base64.b64encode(image_file.read()).decode('utf-8')
+                property['image'] = image_data
         
         
         
